@@ -22,7 +22,7 @@ app.get('/', function(req, res) {
 // Your first API endpoint
 app.post("/api/shorturl", bodyParser.urlencoded({extended: false}))
 app.post("/api/shorturl", function(req, res) {
-  const correctURL = req.body.url.replace(/https?:[/]{2}/, "")
+  const correctURL = req.body.url.replace(/\w+:[/]{0,}/, "")
   dns.lookup(correctURL, (err, address, family) => {
     if (err) {
       res.json({ error: 'invalid url' })
